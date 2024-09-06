@@ -6,11 +6,11 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <h1>Login</h1>
       <form action={signInAction}>
         <Button> Log in </Button>
       </form>
-    </main>
+    </div>
   );
 }
