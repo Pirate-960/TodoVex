@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { signOutAction } from "@/actions/auth-action";
 
 export default function UserProfile() {
   const session = useSession();
@@ -21,7 +22,10 @@ export default function UserProfile() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="hover:cursor-pointer">
-        <div className="flex items-center justify-start gap-1 lg:gap-2 m-0 p-0 lg:px-3 lg:w-full bg-white">
+        <Button
+          variant={"secondary"}
+          className="flex items-center justify-start gap-1 lg:gap-2 m-0 p-0 lg:px-3 lg:w-full bg-white"
+        >
           {imageUrl && (
             <Image
               src={imageUrl}
@@ -32,11 +36,19 @@ export default function UserProfile() {
             />
           )}
           <p className="truncate">{email}</p>
-        </div>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuItem className="lg:w-full px-28">
-          <Button>log out</Button>
+        <DropdownMenuItem className="lg:w-full px-28 flex items-center justify-center">
+          <form action={signOutAction}>
+            <Button
+              type="submit"
+              variant={"ghost"}
+              className="hover:text-primary text-center"
+            >
+              Sign out
+            </Button>
+          </form>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
