@@ -14,7 +14,6 @@ export default function Home() {
         <MobileNav />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:px-8">
           <h1>TodoVex</h1>
-          <UserProfile />
           <Tasks />
         </main>
       </div>
