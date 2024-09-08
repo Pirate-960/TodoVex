@@ -9,6 +9,8 @@ export default function UserProfile() {
 
   const imageUrl = session?.data?.user?.image;
   const name = session?.data?.user?.name;
+  const email = session?.data?.user?.email;
+
   return (
     <div
       className="flex items-center justify-start gap-1 
@@ -19,11 +21,11 @@ export default function UserProfile() {
           src={imageUrl}
           width={24}
           height={24}
-          alt="user profile picture"
+          alt={`${name} profile picture`}
           className="rounded-full"
         />
       )}
-      <p className="truncate">{name}</p>
+      <p className="truncate">{email}</p>
     </div>
   );
 }
