@@ -1,10 +1,6 @@
 import MobileNav from "@/components/nav/mobile-nav";
 import SideBar from "@/components/nav/side-bar";
-import Tasks from "@/components/todovex/tasks";
-import UserProfile from "@/components/nav/user-profile";
-import { Button } from "@/components/ui/button";
-import { signIn } from "next-auth/react";
-import Image from "next/image";
+import TodoList from "@/components/todos/todo-list";
 
 export default function Home() {
   return (
@@ -13,8 +9,7 @@ export default function Home() {
       <div className="flex flex-col">
         <MobileNav />
         <main className="flex flex-1 flex-col gap-4 p-4 lg:px-8">
-          <h1>TodoVex</h1>
-          <Tasks />
+          <TodoList />
         </main>
       </div>
     </div>
