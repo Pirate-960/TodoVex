@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 
 export default function UserProfile() {
   const session = useSession();
@@ -19,7 +20,7 @@ export default function UserProfile() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className="hover:cursor-pointer">
         <div className="flex items-center justify-start gap-1 lg:gap-2 m-0 p-0 lg:px-3 lg:w-full bg-white">
           {imageUrl && (
             <Image
@@ -34,7 +35,9 @@ export default function UserProfile() {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuItem className="lg:w-full px-28">log out</DropdownMenuItem>
+        <DropdownMenuItem className="lg:w-full px-28">
+          <Button>log out</Button>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
