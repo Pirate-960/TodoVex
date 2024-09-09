@@ -1,4 +1,9 @@
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
+
 export default function TodoList() {
+
+  const todos = useQuery(api.todos.get)
   return (
     <div className="xl:px-40">
         <div className="flex items-center justify-between">
