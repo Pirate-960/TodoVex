@@ -15,7 +15,7 @@ import type {
 } from "convex/server";
 import type * as authAdapter from "../authAdapter.js";
 import type * as http from "../http.js";
-import type * as tasks from "../tasks.js";
+import type * as task from "../task.js";
 import type * as todos from "../todos.js";
 
 /**
@@ -29,7 +29,7 @@ import type * as todos from "../todos.js";
 declare const fullApi: ApiFromModules<{
   authAdapter: typeof authAdapter;
   http: typeof http;
-  tasks: typeof tasks;
+  task: typeof task;
   todos: typeof todos;
 }>;
 export declare const api: FilterApi<
