@@ -1,5 +1,5 @@
 import { defineSchema, defineTable } from "convex/server";
-import { Validator, v } from "convex/values";
+import { v, Validator } from "convex/values";
 
 // The users, accounts, sessions and verificationTokens tables are modeled
 // from https://authjs.dev/getting-started/adapters#models
@@ -23,7 +23,7 @@ export const accountSchema = {
     v.literal("email"),
     v.literal("oidc"),
     v.literal("oauth"),
-    v.literal("webauthn"),
+    v.literal("webauthn")
   ),
   provider: v.string(),
   providerAccountId: v.string(),
@@ -63,7 +63,7 @@ const authTables = {
     .index("userId", ["userId"]),
   verificationTokens: defineTable(verificationTokenSchema).index(
     "identifierToken",
-    ["identifier", "token"],
+    ["identifier", "token"]
   ),
   authenticators: defineTable(authenticatorSchema)
     .index("userId", ["userId"])
@@ -71,37 +71,46 @@ const authTables = {
 };
 
 export default defineSchema({
-    ...authTables,
-    // Add any other tables here
-    todos: defineTable({
-      userId: v.id("users"),
-      projectId: v.id("projects"),
-      labelId: v.id("labels"),
-      taskName: v.string(),
-      description: v.optional(v.string()),
-      dueDate: v.number(),
-      priority: v.optional(v.float64()),
-      isCompleted: v.boolean(),
-    }),
-    subTodos: defineTable({
-      userId: v.id("users"),
-      projectId: v.id("projects"),
-      labelId: v.id("labels"),
-      parentId: v.id("todos"),
-      taskName: v.string(),
-      description: v.optional(v.string()),
-      dueDate: v.number(),
-      priority: v.optional(v.float64()),
-      isCompleted: v.boolean(),
-    }),
-    labels: defineTable({
-      userId: v.id("users"),
-      name: v.string(),
-      type: v.union(v.literal("user"), v.literal("system")),
-    }),
-    projects: defineTable({
-      userId: v.id("users"),
-      name: v.string(),
-      type: v.union(v.literal("user"), v.literal("system")),
-    }),
+  ...authTables,
+  todos: defineTable({
+    userId: v.id("users"),
+    projectId: v.id("projects"),
+    labelId: v.id("labels"),
+    taskName: v.string(),
+    description: v.optional(v.string()),
+    dueDate: v.number(),
+    priority: v.optional(v.float64()),
+    isCompleted: v.boolean(),
+    embedding: v.optional(v.array(v.float64())),
+  }).vectorIndex("by_embedding", {
+    vectorField: "embedding",
+    dimensions: 1536,
+    filterFields: ["userId"],
+  }),
+  subTodos: defineTable({
+    userId: v.id("users"),
+    projectId: v.id("projects"),
+    labelId: v.id("labels"),
+    parentId: v.id("todos"),
+    taskName: v.string(),
+    description: v.optional(v.string()),
+    dueDate: v.number(),
+    priority: v.optional(v.float64()),
+    isCompleted: v.boolean(),
+    embedding: v.optional(v.array(v.float64())),
+  }).vectorIndex("by_embedding", {
+    vectorField: "embedding",
+    dimensions: 1536,
+    filterFields: ["userId"],
+  }),
+  labels: defineTable({
+    userId: v.union(v.id("users"), v.null()),
+    name: v.string(),
+    type: v.union(v.literal("user"), v.literal("system")),
+  }),
+  projects: defineTable({
+    userId: v.union(v.id("users"), v.null()),
+    name: v.string(),
+    type: v.union(v.literal("user"), v.literal("system")),
+  }),
 });
