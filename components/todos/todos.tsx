@@ -18,7 +18,7 @@ export default function Todos({ items }: { items: Array<Doc<"todos">> }) {
       checkATodo({ taskId: task._id });
       toast({
         title: "✅ Task completed",
-        description: "You're a rockstar",
+        description: "You're a rockstar!",
         duration: 3000,
       });
     }
