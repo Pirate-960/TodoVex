@@ -1,8 +1,7 @@
 "use client";
-
 import { useSession } from "next-auth/react";
-import React from "react";
 import Image from "next/image";
+import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,7 +43,7 @@ export default function UserProfile() {
             <Button
               type="submit"
               variant={"ghost"}
-              className="hover:text-primary text-center"
+              className="hover:text-primary"
             >
               Sign out
             </Button>
